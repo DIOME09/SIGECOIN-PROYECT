@@ -1,1 +1,0 @@
-https://github.com/DIOME09/EJERCICIOS-SQL/tree/main/bd-proyecto/Dump20230829h
