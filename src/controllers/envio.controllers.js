@@ -15,7 +15,7 @@ export const getenvio = async (req,res) => {
 
 
 
-export const getCategoria = async (req,res) => {
+export const getEnvio = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
             req.params.id
@@ -23,7 +23,7 @@ export const getCategoria = async (req,res) => {
 
         if(rows.length <= 0)
          return res.status(404).json({
-            message: 'Categoria no encontrada',
+            message: 'Envio no encontrada',
           });
         res.json(rows[0]);
       } catch(error) {
@@ -58,7 +58,7 @@ export const createenvio = async (req,res) => {
 
 
 
-export const updateCategoria = async (req,res) => {
+export const updateenvio = async (req,res) => {
     try {
         const {id_envio} = req.params
         const {nombre, descripcion} = req.body
@@ -70,7 +70,7 @@ export const updateCategoria = async (req,res) => {
         
         if(result.affectedRows === 0) 
           return res.status(404).json({
-            message: 'Categoria no encontrada'
+            message: 'Envio no encontrada'
         });
 
         const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
@@ -89,7 +89,7 @@ export const updateCategoria = async (req,res) => {
 
 
 
-export const deleteCategoria = async (req,res) => {
+export const deleteenvio = async (req,res) => {
     try {
     const [result] = await pool.query('DELETE FROM envio WHERE id_envio = ?', [
         req.params.id_envio
@@ -97,7 +97,7 @@ export const deleteCategoria = async (req,res) => {
     
     if(result.affectedRows <= 0) 
       return res.status(404).json({
-        message: 'Categoria no encontrada'
+        message: 'Envio no encontrada'
       });
 
     res.sendStatus(204);
