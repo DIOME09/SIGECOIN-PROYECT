@@ -6,7 +6,7 @@ import proveedoresRoutes from './routes/proveedores.routes.js'
 //import facturaRoutes from './routes/factura.routes.js'
 //import metododepagoRoutes from './routes/metododepago.routes.js'
 //import envioRoutes from './routes/envio.routes.js'
-
+import inventarioRoutes from './routes/inventario.routes.js'
 const app = express()
 
 app.use(express.json())
@@ -18,7 +18,7 @@ app.use('/api',proveedoresRoutes)
 /*app.use('/api',clienteRoutes)
 app.use('/api',adminRoutes)
 app.use('/api',rolesRoutes)*/
-
+app.use('/api',inventarioRoutes)
 //app.use('/api',facturaRoutes)
 //app.use('/api',metododepagoRoutes)
 //app.use('/api',envioRoutes)
