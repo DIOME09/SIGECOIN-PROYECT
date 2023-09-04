@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { getmetododepago, createmetododepago, updatemetododepago, getmetododepago, deletemetododepago } from "../controllers/metododepago.controllers.js";
+import { getmetododepago, createmetododepago, updatemetododepago, getmetododepago, deletemetododepago } from "../controllers/metodopago.controllers.js";
 
 const router = Router()
 
-router.get('/metododepago',getmetododepago)
+router.get('/factura',getmetododepago)
 
-router.get('/metododepago/:id_metododepago',getmetododepago)
+router.post('/factura',createmetododepago)
 
-router.post('/metododepago',createmetododepago)
+router.patch('/factura/:id_factura',updatemetododepago)
 
-router.patch('/metododepago/:id_metododepago',updatemetododepago)
+router.get('/factura',getmetododepago)
 
-router.delete('/metododepago/:id_metododepago',deletemetododepago)
+router.delete('/factura/:id_factura',deletemetododepago)
 
 
 export default router

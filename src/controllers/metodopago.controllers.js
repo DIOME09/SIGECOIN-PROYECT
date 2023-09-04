@@ -40,7 +40,7 @@ export const createmetododepago = async (req,res) => {
     try {
         const {nombre, descripcion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, descripcion) VALUES(?, ?)', 
+          'INSERT INTO metododepago (nombre, descripcion) VALUES(?, ?)', 
           [nombre, descripcion]
         );
         res.send({
@@ -64,7 +64,7 @@ export const updatemetododepago = async (req,res) => {
         const {nombre, descripcion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_metododepago = ?',
+          'UPDATE metododepago SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_metododepago = ?',
           [nombre, descripcion, id_metododepago]
         );
         
