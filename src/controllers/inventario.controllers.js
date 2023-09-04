@@ -1,8 +1,8 @@
 import { pool } from '../db.js'
 
-export const getenvio = async (req,res) => {
+export const getinventarios = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM envio')
+        const [rows] = await pool.query('SELECT * FROM inventario')
         res.json(rows)
     }catch (error) {
         return res.status(500).json({
@@ -15,15 +15,15 @@ export const getenvio = async (req,res) => {
 
 
 
-export const getEnvio = async (req,res) => {
+export const getinventario = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
+        const [rows] = await pool.query('SELECT * FROM inventario WHERE id_inventario = ?', [
             req.params.id
         ]);
 
         if(rows.length <= 0)
          return res.status(404).json({
-            message: 'Envio no encontrada',
+            message: 'inventario no encontrado',
           });
         res.json(rows[0]);
       } catch(error) {
@@ -36,16 +36,16 @@ export const getEnvio = async (req,res) => {
 
 
 
-export const createenvio = async (req,res) => {
+export const createinventarios = async (req,res) => {
     try {
-        const {id_envio, empresa} = req.body
+        const {id_producto} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO envio (id_envio, empresa) VALUES(?, ?)', 
-          [id_envio, empresa]
+          'INSERT INTO inventario (id_producto) VALUES(?)', 
+          [id_producto]
         );
         res.send({
-            id_envio: rows.insertId,
-            empresa,
+            id_inventario: rows.insertId,
+            id_producto,
         });
     } catch(error) {
         return res.status(500).json({
@@ -57,23 +57,25 @@ export const createenvio = async (req,res) => {
 
 
 
-export const updateenvio = async (req,res) => {
+export const updateinventario = async (req,res) => {
     try {
-        const {envio} = req.params
-        const {id_envio,empresa} = req.body
+        const {id_inventario} = req.params
+        const {id_producto} = req.body
 
         const [result] = await pool.query(
-          'UPDATE envio SET id_envio = IFNULL(?, id_envio), descripcion = IFNULL(?,empresa) WHERE id_envio = ?',
-          [id_envio, empresa]
+          'UPDATE inventario SET id_producto = IFNULL(?, id_producto) WHERE id_inventario = ?',
+          [id_producto,id_inventario]
         );
         
         if(result.affectedRows === 0) 
           return res.status(404).json({
-            message: 'Envio no encontrada'
+            message: 'inventario no encontrado'
         });
 
-        const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
-            id_envio,
+        const [rows] = await pool.query('SELECT * FROM inventario WHERE id_inventario = ?', [
+            id_inventario,
+            id_producto,
+            
         ]);
         res.json(rows[0])
       } catch(error) {
@@ -88,15 +90,15 @@ export const updateenvio = async (req,res) => {
 
 
 
-export const deleteenvio = async (req,res) => {
+export const deleteinventario = async (req,res) => {
     try {
-    const [result] = await pool.query('DELETE FROM envio WHERE id_envio = ?', [
-        req.params.id_envio
+    const [result] = await pool.query('DELETE FROM inventario WHERE id_inventario = ?', [
+        req.params.id_inventario
     ]);
     
     if(result.affectedRows <= 0) 
       return res.status(404).json({
-        message: 'Envio no encontrada'
+        message: 'inventario no encontrado'
       });
 
     res.sendStatus(204);

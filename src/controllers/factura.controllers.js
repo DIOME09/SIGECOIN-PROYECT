@@ -1,20 +1,17 @@
-import { pool } from '../db.js'
-
+import { pool } from '../dbjs'
+// corregir el nombre de la tabla de la db en toda esta pagina esta llamando a employee y es factura
 export const getFactura = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM factuta')
+        const [rows] = await pool.query('SELECT * FROM factura')
         res.json(rows)
     }catch (error) {
         return res.status(500).json({
             message:'Algo va mal'
         })
     }
-    
-}
 
-
-
-
+};
+// faltaba };
 export const getfactura = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM factura WHERE id_factura = ?', [
@@ -38,15 +35,21 @@ export const getfactura = async (req,res) => {
 
 export const createFactura = async (req,res) => {
     try {
-        const {nombre, descripcion} = req.body
+    const {id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, descripcion) VALUES(?, ?)', 
-          [nombre, descripcion]
+          'INSERT INTO factura (nombre, descripcion) VALUES(?,id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio ?)',
+          [id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio]
         );
         res.send({
             id_factura: rows.insertId,
-            nombre, 
-            descripcion,
+            id_factura, 
+            id_cliente, 
+            fechaemicion,
+            id_productos,
+            cantidad,
+            preciounitario,
+            preciototal,
+            id_pago,id_envio
         });
     } catch(error) {
         return res.status(500).json({
@@ -60,12 +63,12 @@ export const createFactura = async (req,res) => {
 
 export const updateFactura = async (req,res) => {
     try {
-        const {id_factura} = req.params
-        const {nombre, descripcion} = req.body
+        const {factura} = req.params
+        const {id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
-          [nombre, descripcion, id_factura]
+          'UPDATE factura SET id_factura = IFNULL(?,id_factura), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
+          [id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio]
         );
         
         if(result.affectedRows === 0) 

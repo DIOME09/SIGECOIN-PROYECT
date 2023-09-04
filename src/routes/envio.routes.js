@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { getenvio, createenvio, updateenvio, getenvio, deleteenvio } from "../controllers/envio.controllers.js";
+import { getenvios, createenvios, updateenvio, getenvio, deleteenvio } from "../controllers/envio.controllers.js";
 
 const router = Router()
 
-router.get('/envio',getenvio)
+router.get('/envio',getenvios)
 
 router.get('/envio/:id_envio',getenvio)
 
-router.post('/envio',createenvio)
+router.post('/envio',createenvios)
 
 router.patch('/envio/:id_envio',updateenvio)
 
