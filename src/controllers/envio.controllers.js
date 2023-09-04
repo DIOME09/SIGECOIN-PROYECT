@@ -38,15 +38,14 @@ export const getEnvio = async (req,res) => {
 
 export const createenvio = async (req,res) => {
     try {
-        const {nombre, descripcion} = req.body
+        const {id_envio, empresa} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO envio (nombre, descripcion) VALUES(?, ?)', 
-          [nombre, descripcion]
+          'INSERT INTO envio (id_envio, empresa) VALUES(?, ?)', 
+          [id_envio, empresa]
         );
         res.send({
             id_envio: rows.insertId,
-            nombre, 
-            descripcion,
+            empresa,
         });
     } catch(error) {
         return res.status(500).json({
@@ -60,12 +59,12 @@ export const createenvio = async (req,res) => {
 
 export const updateenvio = async (req,res) => {
     try {
-        const {id_envio} = req.params
-        const {nombre, descripcion} = req.body
+        const {envio} = req.params
+        const {id_envio,empresa} = req.body
 
         const [result] = await pool.query(
-          'UPDATE envio SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_envio = ?',
-          [nombre, descripcion, id_envio]
+          'UPDATE envio SET id_envio = IFNULL(?, id_envio), descripcion = IFNULL(?,empresa) WHERE id_envio = ?',
+          [id_envio, empresa]
         );
         
         if(result.affectedRows === 0) 

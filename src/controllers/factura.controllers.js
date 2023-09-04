@@ -35,15 +35,21 @@ export const getfactura = async (req,res) => {
 
 export const createFactura = async (req,res) => {
     try {
-    const {nombre, descripcion /* faltan datos de la tabla */} = req.body
+    const {id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO factura (nombre, descripcion) VALUES(?, ?)',//agregar ? en values que sean la misma cantidad que los datos que pide 
-          [nombre, descripcion]
+          'INSERT INTO factura (nombre, descripcion) VALUES(?,id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio ?)',
+          [id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio]
         );
         res.send({
             id_factura: rows.insertId,
-            nombre, 
-            descripcion,
+            id_factura, 
+            id_cliente, 
+            fechaemicion,
+            id_productos,
+            cantidad,
+            preciounitario,
+            preciototal,
+            id_pago,id_envio
         });
     } catch(error) {
         return res.status(500).json({
@@ -57,12 +63,12 @@ export const createFactura = async (req,res) => {
 
 export const updateFactura = async (req,res) => {
     try {
-        const {id_factura} = req.params
-        const {nombre, descripcion} = req.body
+        const {factura} = req.params
+        const {id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio} = req.body
 
         const [result] = await pool.query(
-          'UPDATE factura SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
-          [nombre, descripcion, id_factura]
+          'UPDATE factura SET id_factura = IFNULL(?,id_factura), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
+          [id_factura, id_cliente, fechaemicion,id_productos,cantidad,preciounitario,preciototal,id_pago,id_envio]
         );
         
         if(result.affectedRows === 0) 

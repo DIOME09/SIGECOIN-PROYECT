@@ -38,15 +38,15 @@ export const getmetododepago = async (req,res) => {
 
 export const createmetododepago = async (req,res) => {
     try {
-        const {nombre, descripcion} = req.body
+        const {id_pago, metodo_pago, condicion_pago} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO metododepago (nombre, descripcion) VALUES(?, ?)', 
-          [nombre, descripcion]
+          'INSERT INTO metododepago (id_pago, metodo_pago, condicion_pago) VALUES(?, ?)', 
+          [id_pago, metodo_pago, condicion_pago]
         );
         res.send({
-            id_metododepago: rows.insertId,
-            nombre, 
-            descripcion,
+            id_pago: rows.insertId,
+            metodo_pago,
+            condicion_pago,
         });
     } catch(error) {
         return res.status(500).json({
@@ -60,12 +60,12 @@ export const createmetododepago = async (req,res) => {
 
 export const updatemetododepago = async (req,res) => {
     try {
-        const {id_metododepago} = req.params
-        const {nombre, descripcion} = req.body
+        const {metododepago} = req.params
+        const {id_pago, metodo_pago, condicion_pago} = req.body
 
         const [result] = await pool.query(
-          'UPDATE metododepago SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_metododepago = ?',
-          [nombre, descripcion, id_metododepago]
+          'UPDATE metododepago SET id_pago = IFNULL(?, id_pago), descripcion = IFNULL(?,condicion_pago) WHERE id_metododepago = ?',
+          [id_pago, metodo_pago, condicion_pago]
         );
         
         if(result.affectedRows === 0) 
