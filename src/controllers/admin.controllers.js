@@ -12,8 +12,7 @@ export const getadmin = async (req,res) => {
     
 }
 
-// corregir el nombre de la tabla de la db en toda esta pagina esta llamando a employee y es admin
-// corregir message admin es masculino por ende debe ser 'admin no encontrado'
+
 
 
 export const getAdmin = async (req,res) => {
@@ -41,11 +40,7 @@ export const createadmin = async (req,res) => {
     try {
         const {nombre, email, contraseña, telefono, direccion} = req.body
         const [rows] = await pool.query(
-<<<<<<< HEAD
           'INSERT INTO admin (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', 
-=======
-          'INSERT INTO employee (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', //agregar ? en values que sean la misma cantidad que los datos que pide
->>>>>>> 2bbe9a800313ab3b4b7ef7f37a16191749553f92
           [nombre, email, contraseña, telefono, direccion]
         );
         res.send({
