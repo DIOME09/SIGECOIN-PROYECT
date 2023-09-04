@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //datos tabla envio
 
 INSERT INTO envio ( empresa)VALUES("zapatex");
@@ -23,3 +24,11 @@ INSERT INTO metododepago (metodo_pago,condicion_pago)VALUES("paypal,nequi,master
 INSERT INTO metododepago (metodo_pago,condicion_pago)VALUES("paypal,nequi,mastercad,bancolombia","efectivo,transferencias,tarjetascredito/debito");
 INSERT INTO metododepago (metodo_pago,condicion_pago)VALUES("paypal,nequi,mastercad,bancolombia","efectivo,transferencias,tarjetascredito/debito");
 INSERT INTO metododepago (metodo_pago,condicion_pago)VALUES("paypal,nequi,mastercad,bancolombia","efectivo,transferencias,tarjetascredito/debito");
+=======
+
+INSERT INTO categorias (nombre, descripcion)
+VALUES
+("calzado deportivo Femenino", "calzado para dama"),
+("calzado deportivo Niño", "calzado para niño"),
+("calzado para hombre","calzado para hombre");
+>>>>>>> 04d15bf (add datos db y correccion en update del categorias.controllers)
