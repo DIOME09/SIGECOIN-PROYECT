@@ -40,7 +40,7 @@ export const createroles = async (req,res) => {
     try {
         const {id_admin, id_cliente} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (id_admin, id_cliente) VALUES(?, ?)', 
+          'INSERT INTO roles (id_admin, id_cliente) VALUES(?, ?)', 
           [id_admin, id_cliente]
         );
         res.send({
@@ -64,7 +64,7 @@ export const updateroles = async (req,res) => {
         const {id_admin, id_cliente} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET id_admin = IFNULL(?, id_admin), id_clientes = IFNULL(?, id_cliente) WHERE roles = ?',
+          'UPDATE roles SET id_admin = IFNULL(?, id_admin), id_clientes = IFNULL(?, id_cliente) WHERE roles = ?',
           [id_admin, id_cliente]
         );
         

@@ -40,7 +40,7 @@ export const createcliente = async (req,res) => {
     try {
         const {nombre, email, contraseña, telefono, direccion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', 
+          'INSERT INTO cliente (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', 
           [nombre, email, contraseña, telefono, direccion]
         );
         res.send({
@@ -68,7 +68,7 @@ export const updatecliente = async (req,res) => {
         const {nombre, email, contraseña, telefono, direccion } = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), email = IFNULL(?, email) contraseña = IFNULL(?, contraseña) telefono = IFNULL(?, telefono) direccion = IFNULL(?, direccion)  WHERE id_cliente = ?',
+          'UPDATE cliente SET nombre = IFNULL(?, nombre), email = IFNULL(?, email) contraseña = IFNULL(?, contraseña) telefono = IFNULL(?, telefono) direccion = IFNULL(?, direccion)  WHERE id_cliente = ?',
           [nombre, email, contraseña, telefono, direccion, id_cliente]
         );
         

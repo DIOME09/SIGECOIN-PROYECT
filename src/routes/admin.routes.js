@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { getadmin, createadmin, updateadmin, getadmin, deleteadmin } from "../controllers/admin.controllers.js";
+import { getAdmins, createAdmins, updateAdmin, getAdmin, deleteAdmin } from "../controllers/admins.controllers.js";
 
 const router = Router()
 
-router.get('/admin',getadmin)
+router.get('/admins',getAdmins)
 
-router.get('/admin/:id_admin',getadmin)
+router.get('/admins/:id_admins',getAdmin)
 
-router.post('/admin',createadmin)
+router.post('/admins',createAdmins)
 
-router.patch('/admin/:id_admin',updateadmin)
+router.patch('/admins/:id_admins',updateAdmin)
 
-router.delete('/admin/:id_admin',deleteadmin)
+router.delete('/admins/:id_admins',deleteAdmin)
 
 
 export default router
