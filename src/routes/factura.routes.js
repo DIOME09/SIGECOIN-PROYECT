@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { getfactura, createFactura, updateFactura, getFactura, deleteFactura } from "../controllers/factura.controllers.js";
+import { getFacturas, createFacturas, updateFactura, getFactura, deleteFactura } from "../controllers/Facturas.controllers.js";
 
 const router = Router()
 
-router.get('/factura',getFactura)
+router.get('/facturas',getFacturas)
 
-router.get('/factura/:id_factura',getFactura)
+router.get('/facturas/:id_facturas',getFactura)
 
-router.post('/factura',createFactura)
+router.post('/facturas',createFacturas)
 
-router.patch('/factura/:id_factura',updateFactura)
+router.patch('/facturas/:id_facturas',updateFactura)
 
-router.delete('/factura/:id_factura',deleteFactura)
+router.delete('/facturas/:id_facturas',deleteFactura)
 
 
 export default router

@@ -3,7 +3,7 @@ import categoriasRoutes from './routes/categorias.routes.js'
 import entradasRoutes from './routes/entradas.routes.js'
 import indexRoutes from './routes/index.routes.js'
 import proveedoresRoutes from './routes/proveedores.routes.js'
-//import facturaRoutes from './routes/factura.routes.js'
+import facturasRoutes from './routes/facturas.routes.js'
 //import metododepagoRoutes from './routes/metododepago.routes.js'
 //import envioRoutes from './routes/envio.routes.js'
 import inventarioRoutes from './routes/inventario.routes.js'
@@ -19,7 +19,7 @@ app.use('/api',proveedoresRoutes)
 app.use('/api',adminRoutes)
 app.use('/api',rolesRoutes)*/
 app.use('/api',inventarioRoutes)
-//app.use('/api',facturaRoutes)
+app.use('/api',facturasRoutes)
 //app.use('/api',metododepagoRoutes)
 //app.use('/api',envioRoutes)
 
