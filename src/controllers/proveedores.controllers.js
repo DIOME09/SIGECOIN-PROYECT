@@ -1,15 +1,8 @@
 import { pool } from '../db.js'
 
-export const getProveedores = async (req,res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM proveedores')
-        res.json(rows)
-    }catch (error) {
-        return res.status(500).json({
-            message:'Algo va mal'
-        })
-    }
-    
+export const getCategorias = async( req, res) =>{
+    const [rows] = await pool.query('SELECT * FROM proveedores')
+    res.json(rows)
 }
 
 
@@ -71,24 +64,28 @@ export const updateProveedor = async (req,res) => {
           [nombre, email, telefono, id_productos, direccion, id_proveedores]
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'Proveedor no encontrado'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Proveedor no encontrado'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM proveedores WHERE id_proveedores = ?', [
-            id_proveedores,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
+        res.json({
+            message: 'Proveedor actualizad exitosamente',
+            proveedores_id: id_proveedores,
+            nombre, 
+            email, 
+            telefono, 
+            id_productos, 
+            direccion
+        });
+    } catch (error) {
+        console.error('Error al actualizar un proveedor:', error);
         return res.status(500).json({
-            message: 'Algo va mal'
+            message: 'Algo va mal',
         });
- 
     }
-    
 }
-
 
 
 
