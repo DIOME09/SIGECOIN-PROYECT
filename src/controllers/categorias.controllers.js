@@ -1,26 +1,29 @@
 import { pool } from '../db.js'
-// corregir el nombre de la tabla de la db en toda esta pagina esta llamando a employee y es factura
-export const getFactura = async (req,res) => {
+
+export const getCategorias = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM factuta')
+        const [rows] = await pool.query('SELECT * FROM categorias')
         res.json(rows)
     }catch (error) {
         return res.status(500).json({
             message:'Algo va mal'
         })
     }
+    
+}
 
-};
-// faltaba };
-export const getfactura = async (req,res) => {
+
+
+
+export const getCategoria = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM factura WHERE id_factura = ?', [
+        const [rows] = await pool.query('SELECT * FROM categorias WHERE id_categorias = ?', [
             req.params.id
         ]);
 
         if(rows.length <= 0)
          return res.status(404).json({
-            message: 'Factura no encontrada',
+            message: 'Categoria no encontrada',
           });
         res.json(rows[0]);
       } catch(error) {
@@ -33,15 +36,15 @@ export const getfactura = async (req,res) => {
 
 
 
-export const createFactura = async (req,res) => {
+export const createCategorias = async (req,res) => {
     try {
-    const {nombre, descripcion /* faltan datos de la tabla */} = req.body
+        const {nombre, descripcion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, descripcion) VALUES(?, ?)',//agregar ? en values que sean la misma cantidad que los datos que pide 
+          'INSERT INTO categorias (nombre, descripcion) VALUES(?, ?)', 
           [nombre, descripcion]
         );
         res.send({
-            id_factura: rows.insertId,
+            id_categorias: rows.insertId,
             nombre, 
             descripcion,
         });
@@ -55,23 +58,23 @@ export const createFactura = async (req,res) => {
 
 
 
-export const updateFactura = async (req,res) => {
+export const updateCategoria = async (req,res) => {
     try {
-        const {id_factura} = req.params
+        const {id_categorias} = req.params
         const {nombre, descripcion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
-          [nombre, descripcion, id_factura]
+          'UPDATE categorias SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_categorias = ?',
+          [nombre, descripcion, id_categorias]
         );
         
         if(result.affectedRows === 0) 
           return res.status(404).json({
-            message: 'Factura no encontrada'
+            message: 'Categoria no encontrada'
         });
 
-        const [rows] = await pool.query('SELECT * FROM factura WHERE id_factura = ?', [
-            id_factura,
+        const [rows] = await pool.query('SELECT * FROM categorias WHERE id_categorias = ?', [
+            id_categorias,
         ]);
         res.json(rows[0])
       } catch(error) {
@@ -86,15 +89,15 @@ export const updateFactura = async (req,res) => {
 
 
 
-export const deleteFactura = async (req,res) => {
+export const deleteCategoria = async (req,res) => {
     try {
-    const [result] = await pool.query('DELETE FROM categorias WHERE id_factura = ?', [
-        req.params.id_factura
+    const [result] = await pool.query('DELETE FROM categorias WHERE id_categorias = ?', [
+        req.params.id_categorias
     ]);
     
     if(result.affectedRows <= 0) 
       return res.status(404).json({
-        message: 'Factura no encontrada'
+        message: 'Categoria no encontrada'
       });
 
     res.sendStatus(204);

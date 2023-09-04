@@ -40,7 +40,7 @@ export const createEntradas = async (req,res) => {
     try {
         const {id_productos, cantidad} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (id_productos, cantidad) VALUES(?, ?)', 
+          'INSERT INTO entradas (id_productos, cantidad) VALUES(?, ?)', 
           [id_productos, cantidad]
         );
         res.send({
