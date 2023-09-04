@@ -11,7 +11,7 @@ export const getCategorias = async( req, res) =>{
 export const getProveedor = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM proveedores WHERE id_proveedores = ?', [
-            req.params.id
+            req.params.id_proveedores
         ]);
 
         if(rows.length <= 0)

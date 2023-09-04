@@ -1,15 +1,8 @@
 import { pool } from '../db.js'
 
-export const getEntradas = async (req,res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM entradas')
-        res.json(rows)
-    }catch (error) {
-        return res.status(500).json({
-            message:'Algo va mal'
-        })
-    }
-    
+export const getEntradas = async( req, res) =>{
+    const [rows] = await pool.query('SELECT * FROM entradas')
+    res.json(rows)
 }
 
 
@@ -18,7 +11,7 @@ export const getEntradas = async (req,res) => {
 export const getEntrada = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM entradas WHERE id_entradas = ?', [
-            req.params.id
+            req.params.id_entradas
         ]);
 
         if(rows.length <= 0)
@@ -66,26 +59,29 @@ export const updateEntrada = async (req,res) => {
         const [result] = await pool.query(
           'UPDATE entradas SET id_productos = IFNULL(?, id_productos), cantidad = IFNULL(?, cantidad) WHERE id_entradas = ?',
           [id_productos, cantidad, id_entradas]
-          //verificar si se agrega si la fecha ', fecha = IFNULL(?, fecha)'
+          
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'Entrada no encontrada'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Entrada no encontrada'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM entradas WHERE id_entradas = ?', [
-            id_entradas,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
-        return res.status(500).json({
-            message: 'Algo va mal'
+        res.json({
+            message: 'Entrada actualizada exitosamente',
+            entrada_id: id_entradas,
+            id_productos, 
+            cantidad
         });
- 
+    } catch (error) {
+        console.error('Error al actualizar una entrada:', error);
+        return res.status(500).json({
+            message: 'Algo va mal',
+        });
     }
-    
 }
+
 
 
 
