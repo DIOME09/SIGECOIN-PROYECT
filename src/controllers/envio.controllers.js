@@ -40,7 +40,7 @@ export const createenvio = async (req,res) => {
     try {
         const {nombre, descripcion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, descripcion) VALUES(?, ?)', 
+          'INSERT INTO envio (nombre, descripcion) VALUES(?, ?)', 
           [nombre, descripcion]
         );
         res.send({
@@ -64,7 +64,7 @@ export const updateenvio = async (req,res) => {
         const {nombre, descripcion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_envio = ?',
+          'UPDATE envio SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_envio = ?',
           [nombre, descripcion, id_envio]
         );
         

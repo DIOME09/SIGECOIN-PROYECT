@@ -1,8 +1,8 @@
-import { pool } from '../db.js'
+import { pool } from '../dbjs'
 // corregir el nombre de la tabla de la db en toda esta pagina esta llamando a employee y es factura
 export const getFactura = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM factuta')
+        const [rows] = await pool.query('SELECT * FROM factura')
         res.json(rows)
     }catch (error) {
         return res.status(500).json({
@@ -37,7 +37,7 @@ export const createFactura = async (req,res) => {
     try {
     const {nombre, descripcion /* faltan datos de la tabla */} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO employee (nombre, descripcion) VALUES(?, ?)',//agregar ? en values que sean la misma cantidad que los datos que pide 
+          'INSERT INTO factura (nombre, descripcion) VALUES(?, ?)',//agregar ? en values que sean la misma cantidad que los datos que pide 
           [nombre, descripcion]
         );
         res.send({
@@ -61,7 +61,7 @@ export const updateFactura = async (req,res) => {
         const {nombre, descripcion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE employee SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
+          'UPDATE factura SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion) WHERE id_factura = ?',
           [nombre, descripcion, id_factura]
         );
         
