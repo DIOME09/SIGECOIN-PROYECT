@@ -59,11 +59,11 @@ export const createenvio = async (req,res) => {
 
 export const updateenvio = async (req,res) => {
     try {
-        const {envio} = req.params
-        const {id_envio,empresa} = req.body
+        const {id_envio} = req.params
+        const {empresa} = req.body
 
         const [result] = await pool.query(
-          'UPDATE envio SET id_envio = IFNULL(?, id_envio), descripcion = IFNULL(?,empresa) WHERE id_envio = ?',
+          'UPDATE envio SET id_envio = IFNULL(?, id_envio), empresa = IFNULL(?,empresa) WHERE id_envio = ?',
           [id_envio, empresa]
         );
         
