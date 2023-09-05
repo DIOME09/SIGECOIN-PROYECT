@@ -31,16 +31,15 @@ export const getFactura = async (req,res) => {
 
 export const createFacturas = async (req,res) => {
     try {
-        const {id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio} = req.body
+        const {id_cliente, id_productos, precioUnitario, precioTotal, id_pago, id_envio} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO facturas (id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio) VALUES(?, ?, ?, ?, ?, ?, ?)', 
-          [id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio]
+          'INSERT INTO facturas (id_cliente, id_productos, precioUnitario, precioTotal, id_pago, id_envio) VALUES(?, ?, ?, ?, ?, ?, ?)', 
+          [id_cliente, id_productos, precioUnitario, precioTotal, id_pago, id_envio]
         );
         res.send({
             id_factura: rows.insertId,
             id_cliente,
-            id_productos, 
-            cantidad, 
+            id_productos,  
             precioUnitario, 
             precioTotal, 
             id_pago, 
@@ -59,11 +58,11 @@ export const createFacturas = async (req,res) => {
 export const updateFactura = async (req,res) => {
     try {
         const {id_facturas} = req.params
-        const {id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio} = req.body
+        const {id_cliente, id_productos, precioUnitario, precioTotal, id_pago, id_envio} = req.body
 
         const [result] = await pool.query(
           'UPDATE facturas SET id_cliente = IFNULL(?, id_cliente), id_productos = IFNULL(?, id_productos), cantidad = IFNULL(?, cantidad), precioUnitario = IFNULL(?, precioUnitario), precioTotal = IFNULL(?, precioTotal), id_pago = IFNULL(?, id_pago), id_envio = IFNULL(?, id_envio) WHERE id_facturas = ?',
-          [id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio, id_facturas]
+          [id_cliente, id_productos, precioUnitario, precioTotal, id_pago, id_envio, id_facturas]
         );
         
         if (rows.affectedRows === 0) {
@@ -77,7 +76,6 @@ export const updateFactura = async (req,res) => {
             factura_id: id_facturas,
             id_cliente, 
             id_productos, 
-            cantidad, 
             precioUnitario, 
             precioTotal, 
             id_pago, 
