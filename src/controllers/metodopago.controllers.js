@@ -17,7 +17,7 @@ export const getMetododepago = async (req,res) => {
 
 export const getmetododepago = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_metododepago = ?', [
+        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_pago = ?', [
             req.params.id
         ]);
 
@@ -40,7 +40,7 @@ export const createmetododepago = async (req,res) => {
     try {
         const {id_pago, metodo_pago, condicion_pago} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO metododepago (id_pago, metodo_pago, condicion_pago) VALUES(?, ?)', 
+          'INSERT INTO metododepago (nombre,descripcion) VALUES(?, id_pago, metodo_pago, condicion_pago  ?)', 
           [id_pago, metodo_pago, condicion_pago]
         );
         res.send({
@@ -64,7 +64,7 @@ export const updatemetododepago = async (req,res) => {
         const {id_pago, metodo_pago, condicion_pago} = req.body
 
         const [result] = await pool.query(
-          'UPDATE metododepago SET id_pago = IFNULL(?, id_pago), descripcion = IFNULL(?,condicion_pago) WHERE id_metododepago = ?',
+          'UPDATE metododepago SET id_pago = IFNULL(?, id_pago), descripcion = IFNULL(?,descricion) WHERE id_pago = ?',
           [id_pago, metodo_pago, condicion_pago]
         );
         
@@ -73,7 +73,7 @@ export const updatemetododepago = async (req,res) => {
             message: 'Metododepago no encontrada'
         });
 
-        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_metododepago = ?', [
+        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_pago = ?', [
             id_metododepago,
         ]);
         res.json(rows[0])
