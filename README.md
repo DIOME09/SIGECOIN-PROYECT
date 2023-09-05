@@ -52,5 +52,5 @@ SIGECOIN ES UN SISTEMA DE GESTION CONTABLE E INVENTARIO HECHO PARA SOLUCIONAR Y 
 
 <div align="center">
 
-![Logo](https://fontmeme.com/permalink/230904/e8896ba9e11d10952410ef2e06339081.png)
+![Logo]()
 </div>
