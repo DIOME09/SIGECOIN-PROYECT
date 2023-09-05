@@ -1,6 +1,6 @@
 import { pool } from '../db.js'
 
-export const getadmins = async (req,res) => {
+export const getAdmins = async (req,res) => {
     const [rows] = await pool.query('SELECT * FROM admin')
     res.json(rows)
 }
@@ -29,11 +29,11 @@ export const getAdmin = async (req,res) => {
 
 
 
-export const createadmin = async (req,res) => {
+export const createAdmins = async (req,res) => {
     try {
         const {nombre, email, contraseña, telefono, direccion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO admin (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', 
+          'INSERT INTO admin (nombre, email, contraseña, telefono, direccion) VALUES(?, ?, ?, ?, ?, ?, ?)', 
           [nombre, email, contraseña, telefono, direccion]
         );
         res.send({
@@ -55,7 +55,7 @@ export const createadmin = async (req,res) => {
 
 
 
-export const updateadmin = async (req,res) => {
+export const updateAdmin = async (req,res) => {
     try {
         const {id_admin} = req.params
         const {nombre, email, contraseña, telefono, direccion } = req.body
@@ -91,7 +91,7 @@ export const updateadmin = async (req,res) => {
 
 
 
-export const deleteadmin = async (req,res) => {
+export const deleteAdmin = async (req,res) => {
     try {
     const [result] = await pool.query('DELETE FROM admin WHERE id_admin = ?', [
         req.params.id_admin

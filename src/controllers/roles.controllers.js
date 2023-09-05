@@ -1,6 +1,6 @@
 import { pool } from '../db.js'
 
-export const getroles = async (req,res) => {
+export const getRoles = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM roles')
         res.json(rows)
@@ -15,7 +15,7 @@ export const getroles = async (req,res) => {
 
 
 
-export const getRoles = async (req,res) => {
+export const getRole = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM roles WHERE id_admin = ?', [
             req.params.id
@@ -36,7 +36,7 @@ export const getRoles = async (req,res) => {
 
 
 
-export const createroles = async (req,res) => {
+export const createRoles = async (req,res) => {
     try {
         const {id_admin, id_cliente} = req.body
         const [rows] = await pool.query(
@@ -58,7 +58,7 @@ export const createroles = async (req,res) => {
 
 
 
-export const updateroles = async (req,res) => {
+export const updateRoles = async (req,res) => {
     try {
         const {roles} = req.params
         const {id_admin, id_cliente} = req.body
@@ -89,7 +89,7 @@ export const updateroles = async (req,res) => {
 
 
 
-export const deleteroles = async (req,res) => {
+export const deleteRole = async (req,res) => {
     try {
     const [result] = await pool.query('DELETE FROM roles WHERE roles = ?', [
         req.params.roles
