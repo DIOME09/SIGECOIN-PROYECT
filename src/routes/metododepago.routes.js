@@ -3,16 +3,16 @@ import { getmetododepagos, createmetododepagos, updatemetododepago, getmetododep
 
 const router = Router()
 
-router.get('/factura',getmetododepagos)
+router.get('/metododepago',getmetododepagos)
 
-router.get('/factura/:id_factura',getmetododepago)
+router.get('/metododepago/:id_pago',getmetododepago)
 
-router.post('/factura',createmetododepagos)
+router.post('/metododepago',createmetododepagos)
 
-router.patch('/factura/:id_factura',updatemetododepago)
+router.patch('/metododepago/:id_pago',updatemetododepago)
 
 
-router.delete('/factura/:id_factura',deletemetododepago)
+router.delete('/metododepago/:id_pago',deletemetododepago)
 
 
 export default router
