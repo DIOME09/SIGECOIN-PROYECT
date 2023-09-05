@@ -18,7 +18,7 @@ export const getFacturas = async (req,res) => {
 export const getFactura = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM facturas WHERE id_facturas = ?', [
-            req.params.id
+            req.params.id_factura
         ]);
 
         if(rows.length <= 0)
@@ -40,11 +40,12 @@ export const createFacturas = async (req,res) => {
     try {
         const {id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO facturas (id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio) VALUES(?, ?)', 
+          'INSERT INTO facturas (id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio) VALUES(?, ?, ?, ?, ?, ?, ?)', 
           [id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio]
         );
         res.send({
-            id_cliente: rows.insertId,
+            id_factura: rows.insertId,
+            id_cliente,
             id_productos, 
             cantidad, 
             precioUnitario, 
@@ -72,22 +73,29 @@ export const updateFactura = async (req,res) => {
           [id_cliente, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio, id_facturas]
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'Factura no encontrada'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Factura no encontrada'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM facturas WHERE id_facturas = ?', [
-            id_facturas,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
-        return res.status(500).json({
-            message: 'Algo va mal'
+        res.json({
+            message: 'Factura actualizada exitosamente',
+            factura_id: id_facturas,
+            id_cliente, 
+            id_productos, 
+            cantidad, 
+            precioUnitario, 
+            precioTotal, 
+            id_pago, 
+            id_envio
         });
- 
+    } catch (error) {
+        console.error('Error al actualizar una factura:', error);
+        return res.status(500).json({
+            message: 'Algo va mal',
+        });
     }
-    
 }
 
 
