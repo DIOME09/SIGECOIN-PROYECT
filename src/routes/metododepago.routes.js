@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getmetododepagos, createmetododepagos, updatemetododepago, getmetododepago, deletemetododepago } from "../controllers/metodopago.controllers.js";
+import { getmetododepagos, createmetododepagos, updatemetododepago, getmetododepago, deletemetododepago } from "../controllers/metododepago.controllers.js";
 
 const router = Router()
 

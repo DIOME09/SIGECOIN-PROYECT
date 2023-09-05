@@ -1,15 +1,8 @@
 import { pool } from '../db.js'
 
 export const getadmins = async (req,res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM admin')
-        res.json(rows)
-    }catch (error) {
-        return res.status(500).json({
-            message:'Algo va mal'
-        })
-    }
-    
+    const [rows] = await pool.query('SELECT * FROM admin')
+    res.json(rows)
 }
 
 
@@ -67,27 +60,32 @@ export const updateadmin = async (req,res) => {
         const {id_admin} = req.params
         const {nombre, email, contraseña, telefono, direccion } = req.body
 
-        const [result] = await pool.query(
+        const [rows] = await pool.query(
           'UPDATE admin SET nombre = IFNULL(?, nombre), email = IFNULL(?, email) contraseña = IFNULL(?, contraseña) telefono = IFNULL(?, telefono) direccion = IFNULL(?, direccion)  WHERE id_admin = ?',
           [nombre, email, contraseña, telefono, direccion, id_admin]
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'admin no encontrada'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Admin no encontrado'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM admin WHERE id_admin = ?', [
-            id_admin,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
-        return res.status(500).json({
-            message: 'Algo va mal'
+        res.json({
+            message: 'Admin actualizado exitosamente',
+            admin_id: id_admin,
+            nombre, 
+            email, 
+            contraseña, 
+            telefono, 
+            direccion
         });
- 
+    } catch (error) {
+        console.error('Error al actualizar un admin:', error);
+        return res.status(500).json({
+            message: 'Algo va mal',
+        });
     }
-    
 }
 
 

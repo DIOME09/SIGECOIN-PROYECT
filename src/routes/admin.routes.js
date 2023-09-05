@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAdmins, createAdmins, updateAdmin, getAdmin, deleteAdmin } from "../controllers/admins.controllers.js";
+import { getAdmins, createAdmins, updateAdmin, getAdmin, deleteAdmin } from "../controllers/admin.controllers.js";
 
 const router = Router()
 
