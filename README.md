@@ -1,15 +1,56 @@
-# SIGECOIN-PROYECT
-GRUPOS de trabajo:
-Marcos y Jose: INVENTARIO>inventario,categorias, productos, entradas, provedores.
-Daniela y Diomedez: FACTURA>factura, envio, metodo de pago.
-marin: ROLES>roles, admin, cliente.
+<!-- Banner SIGECOIN -->
+<br>
+<div align="center">
+	<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&duration=3000&pause=400&color=3BAA35&background=FFFFFF00&center=true&vCenter=true&width=435&lines=Welcome+to+SAGA;A+Node.js+and+React.js+project" alt=""/>
+</div>
+<br>
+<div align="center">
 
-NOTAS: 
-*el password ubicado en config.js dejarlo de la sigiente manera: export const DB_PASSWORD = process.env.DB_PASSWORD || ''
-*al momento de importar la DB nombrarla asi = calzasport
-*agregar datos a la DB ubicada en ../db/datos.sql
-*verificar los comentarios que deje en los trabajos que realizaron
-*verifiquen lo que eliminan han eliminado 2 archivos importantes
-* hacer commits coherentes "cambios" no es un commit valido
-* por cada archivo realizado hacer un push para en caso de error sea mas facil detectar el error
-* tratar de no hacer push si el codigo está dando error para no retrasar el trabajo de los demas 
+  ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+  ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+</div>
+
+<!-- Información principal -->
+# SIGECOIN
+
+SIGECOIN ES UN SISTEMA DE GESTION CONTABLE E INVENTARIO HECHO PARA SOLUCIONAR Y ORGANIZAR LOS SISTEMAS DE GESTION CONTABLE E INVENTARIO QUE PUEDA TENER UN ALMACEN O EMPRESA.
+
+<!-- Stack utilizado -->
+## Tech Stack
+
+**Client:** <br>
+<a href="https://react.dev/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" alt="React.js" width="40" height="40"/></a>
+<a href="https://es.redux.js.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/redux.svg" alt="Redux" width="40" height="40"/></a>
+<a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/></a>
+
+**Server:** <br>
+<a href="https://nodejs.org/es" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" alt="Node.js" width="40" height="40"/></a>
+<a href="https://expressjs.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/express-fashion-stores.svg" alt="Express" width="40" height="40"/></a>
+<a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/mysql-logo.svg" alt="MySql" width="45" height="40"/></a>
+<a href="https://www.mongodb.com/es" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" alt="MongoDB" width="40" height="40"/></a>
+
+
+## Running
+
+<!-- Autores del proyecto -->
+## Autores
+
+- [@m4rquitos](https://github.com/m4rquitos)
+- [@Dannyg01](https://github.com/Dannyg01)
+- [@joseRamirezgomez](https://github.com/joseRamirezgomez)
+- [@marinhtml](https://github.com/marinhtml)
+- [@DIOME09](https://github.com/DIOME09)
+
+<!-- Documentación oficial -->
+## Documentación Oficial
+
+[Documentación v1.9](https://docs.google.com/document/d/1M8_dARq6IqniDn-UC1qhkdSxCQJ0xVSZ/edit?usp=sharing&ouid=106348616457626652803&rtpof=true&sd=true)
+
+<br>
+<br>
+<br>
+
+<div align="center">
+
+![Logo](https://fontmeme.com/permalink/230904/e8896ba9e11d10952410ef2e06339081.png)
+</div>
