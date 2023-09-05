@@ -1,6 +1,6 @@
 import { pool } from '../db.js'
 
-export const getadmin = async (req,res) => {
+export const getadmins = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM admin')
         res.json(rows)
