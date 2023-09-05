@@ -58,7 +58,7 @@ export const createRoles = async (req,res) => {
 
 
 
-export const updateRoles = async (req,res) => {
+export const updateRole = async (req,res) => {
     try {
         const {roles} = req.params
         const {id_admin, id_cliente} = req.body
