@@ -1,15 +1,8 @@
 import { pool } from '../db.js'
 
-export const getFacturas = async (req,res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM facturas')
-        res.json(rows)
-    }catch (error) {
-        return res.status(500).json({
-            message:'Algo va mal'
-        })
-    }
-    
+export const getFacturas = async( req, res) =>{
+    const [rows] = await pool.query('SELECT * FROM facturas')
+    res.json(rows)
 }
 
 

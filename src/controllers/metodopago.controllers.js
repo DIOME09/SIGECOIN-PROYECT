@@ -1,15 +1,8 @@
 import { pool } from '../db.js'
 
-export const getMetododepago = async (req,res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM metododepago')
-        res.json(rows)
-    }catch (error) {
-        return res.status(500).json({
-            message:'Algo va mal'
-        })
-    }
-    
+export const getmetododepagos = async (req,res) => {
+    const [rows] = await pool.query('SELECT * FROM metododepago')
+    res.json(rows)
 }
 
 
@@ -36,7 +29,7 @@ export const getmetododepago = async (req,res) => {
 
 
 
-export const createmetododepago = async (req,res) => {
+export const createmetododepagos = async (req,res) => {
     try {
         const {id_pago, metodo_pago, condicion_pago} = req.body
         const [rows] = await pool.query(
@@ -63,27 +56,30 @@ export const updatemetododepago = async (req,res) => {
         const {metododepago} = req.params
         const {id_pago, metodo_pago, condicion_pago} = req.body
 
-        const [result] = await pool.query(
+        const [rows] = await pool.query(
           'UPDATE metododepago SET id_pago = IFNULL(?, id_pago), descripcion = IFNULL(?,condicion_pago) WHERE id_metododepago = ?',
           [id_pago, metodo_pago, condicion_pago]
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'Metododepago no encontrada'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Metodo de pago no encontrado'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_metododepago = ?', [
-            id_metododepago,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
-        return res.status(500).json({
-            message: 'Algo va mal'
+        res.json({
+            message: 'Metodo de pago actualizado exitosamente',
+            metododepago_id: id_metododepago,
+            id_pago, 
+            metodo_pago, 
+            condicion_pago
         });
- 
+    } catch (error) {
+        console.error('Error al actualizar una categoria:', error);
+        return res.status(500).json({
+            message: 'Algo va mal',
+        });
     }
-    
 }
 
 
