@@ -33,7 +33,7 @@ export const createClientes = async (req,res) => {
     try {
         const {nombre, email, contraseña, telefono, direccion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO cliente (nombre, email, contraseña, telefono, direccion) VALUES(?, ?)', 
+          'INSERT INTO cliente (nombre, email, contraseña, telefono, direccion) VALUES(?, ?, ?, ?, ?, ?, ?)', 
           [nombre, email, contraseña, telefono, direccion]
         );
         res.send({
@@ -55,7 +55,7 @@ export const createClientes = async (req,res) => {
 
 
 
-export const updatecliente = async (req,res) => {
+export const updateCliente = async (req,res) => {
     try {
         const {id_cliente} = req.params
         const {nombre, email, contraseña, telefono, direccion } = req.body
@@ -92,7 +92,7 @@ export const updatecliente = async (req,res) => {
 
 
 
-export const deletecliente = async (req,res) => {
+export const deleteCliente = async (req,res) => {
     try {
     const [result] = await pool.query('DELETE FROM cliente WHERE id_cliente = ?', [
         req.params.id_cliente
