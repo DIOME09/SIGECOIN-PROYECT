@@ -56,9 +56,9 @@ export const updatemetododepago = async (req,res) => {
         const {id_pago} = req.params
         const {metodo_pago, condicion_pago} = req.body
 
-        const [result] = await pool.query(
-          'UPDATE metododepago SET id_pago = IFNULL(?, id_pago), metodo_pago = IFNULL(?,metodo_pago), condicion_pago = IFNULL(?,condicion_pago) WHERE id_pago = ?',
-          [id_pago, metodo_pago, condicion_pago]
+        const [rows] = await pool.query(
+          'UPDATE metododepago SET  metodo_pago = IFNULL(?,metodo_pago), condicion_pago = IFNULL(?,condicion_pago) WHERE id_pago = ?',
+          [metodo_pago, condicion_pago, id_pago ]
         );
         
         if (rows.affectedRows === 0) {
@@ -69,15 +69,12 @@ export const updatemetododepago = async (req,res) => {
 
         res.json({
             message: 'Metodo de pago actualizado exitosamente',
-            metododepago_id: id_pago,
-            id_pago, 
+            pago_id: id_pago, 
             metodo_pago, 
             condicion_pago
         });
 
-        const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_pago = ?', [
-            id_pago,
-        ]);
+     
         res.json(rows[0])
       } catch(error) {
         return res.status(500).json({

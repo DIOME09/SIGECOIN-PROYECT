@@ -1,6 +1,6 @@
 import { pool } from '../db.js'
 
-export const getenvio = async (req,res) => {
+export const getenvios = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM envio')
         res.json(rows)
@@ -15,7 +15,7 @@ export const getenvio = async (req,res) => {
 
 
 
-export const getEnvio = async (req,res) => {
+export const getenvio = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
             req.params.id
@@ -36,7 +36,7 @@ export const getEnvio = async (req,res) => {
 
 
 
-export const createenvio = async (req,res) => {
+export const createenvios = async (req,res) => {
     try {
         const {id_envio, empresa} = req.body
         const [rows] = await pool.query(
