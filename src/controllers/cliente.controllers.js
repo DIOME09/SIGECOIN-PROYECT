@@ -55,7 +55,7 @@ export const createClientes = async (req,res) => {
 
 
 
-export const updatecliente = async (req,res) => {
+export const updateCliente = async (req,res) => {
     try {
         const {id_cliente} = req.params
         const {nombre, email, contraseña, telefono, direccion } = req.body
