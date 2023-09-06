@@ -17,13 +17,13 @@ export const getRoles = async (req,res) => {
 
 export const getRole = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM roles WHERE id_admin = ?', [
+        const [rows] = await pool.query('SELECT * FROM roles WHERE id_rol = ?', [
             req.params.id
         ]);
 
         if(rows.length <= 0)
          return res.status(404).json({
-            message: 'roles no encontrada',
+            message: 'Roles no encontrada',
           });
         res.json(rows[0]);
       } catch(error) {
@@ -38,15 +38,15 @@ export const getRole = async (req,res) => {
 
 export const createRoles = async (req,res) => {
     try {
-        const {id_admin, id_cliente} = req.body
+        const {nombre_rol, descripcion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO roles (id_admin, id_cliente) VALUES(?, ?)', 
-          [id_admin, id_cliente]
+          'INSERT INTO roles (nombre_rol, descripcion) VALUES(?, ?)', 
+          [nombre_rol, descripcion]
         );
         res.send({
             roles: rows.insertId,
-            id_admin, 
-            id_cliente
+            nombre_rol, 
+            descripcion
         });
     } catch(error) {
         return res.status(500).json({
@@ -61,16 +61,16 @@ export const createRoles = async (req,res) => {
 export const updateRole = async (req,res) => {
     try {
         const {roles} = req.params
-        const {id_admin, id_cliente} = req.body
+        const {nombre_rol, descripcion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE roles SET id_admin = IFNULL(?, id_admin), id_clientes = IFNULL(?, id_cliente) WHERE roles = ?',
-          [id_admin, id_cliente]
+          'UPDATE roles SET nombre_rol = IFNULL(?, nombre_rol), descripcion = IFNULL(?, descripcion) WHERE roles = ?',
+          [nombre_rol, descripcion]
         );
         
         if(result.affectedRows === 0) 
           return res.status(404).json({
-            message: 'roles no encontrada'
+            message: 'Roles no encontrada'
         });
 
         const [rows] = await pool.query('SELECT * FROM roles WHERE roles = ?', [
@@ -97,7 +97,7 @@ export const deleteRole = async (req,res) => {
     
     if(result.affectedRows <= 0) 
       return res.status(404).json({
-        message: 'roles no encontrada'
+        message: 'Roles no encontrada'
       });
 
     res.sendStatus(204);

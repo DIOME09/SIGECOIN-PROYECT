@@ -7,9 +7,8 @@ import facturasRoutes from './routes/factura.routes.js'
 import metododepagoRoutes from './routes/metododepago.routes.js'
 import envioRoutes from './routes/envio.routes.js'
 import inventarioRoutes from './routes/inventario.routes.js'
-import clienteRoutes from './routes/cliente.routes.js'
-import adminRoutes from './routes/admin.routes.js'
 import rolesRoutes from './routes/roles.routes.js'
+import usuariosRoutes from './routes/usuarios.routes.js'
 import productosRoutes from './routes/productos.routes.js'
 
 
@@ -25,8 +24,7 @@ app.use(indexRoutes)
 app.use('/api',categoriasRoutes)
 app.use('/api',entradasRoutes)
 app.use('/api',proveedoresRoutes)
-app.use('/api',clienteRoutes)
-app.use('/api',adminRoutes)
+app.use('/api',usuariosRoutes)
 app.use('/api',rolesRoutes)
 app.use('/api',inventarioRoutes)
 app.use('/api',facturasRoutes)
