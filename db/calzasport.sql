@@ -16,36 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
---
-
-DROP TABLE IF EXISTS `admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
-  `id_admin` int NOT NULL AUTO_INCREMENT,
-  `id_inventario` int DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `telefono` int DEFAULT NULL,
-  `contraseña` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_admin`),
-  KEY `id_inventario` (`id_inventario`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_inventario`) REFERENCES `inventario` (`id_inventario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin`
---
-
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `categorias`
 --
 
@@ -53,10 +23,10 @@ DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorias` (
-  `id_categorias` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_categorias`)
+  `id_Categorias` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(45) DEFAULT NULL,
+  `Descripcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_Categorias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,60 +40,6 @@ LOCK TABLES `categorias` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `cliente`
---
-
-DROP TABLE IF EXISTS `cliente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cliente` (
-  `id_cliente` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `contraseña` varchar(45) DEFAULT NULL,
-  `telefono` int DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cliente`
---
-
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `entradas`
---
-
-DROP TABLE IF EXISTS `entradas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `entradas` (
-  `id_entradas` int NOT NULL AUTO_INCREMENT,
-  `id_productos` int DEFAULT NULL,
-  `cantidad` int DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  PRIMARY KEY (`id_entradas`),
-  KEY `id_productos` (`id_productos`),
-  CONSTRAINT `entradas_ibfk_1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id_productos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `entradas`
---
-
-LOCK TABLES `entradas` WRITE;
-/*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `envio`
 --
 
@@ -134,7 +50,7 @@ CREATE TABLE `envio` (
   `id_envio` int NOT NULL AUTO_INCREMENT,
   `empresa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_envio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,22 +71,23 @@ DROP TABLE IF EXISTS `factura`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `factura` (
   `id_factura` int NOT NULL AUTO_INCREMENT,
-  `id_cliente` int DEFAULT NULL,
-  `fechaemicon` date DEFAULT NULL,
+  `id_usuario` int DEFAULT NULL,
+  `fechaEmision` date DEFAULT NULL,
   `id_productos` int DEFAULT NULL,
-  `preciounitario` int DEFAULT NULL,
-  `preciototal` int DEFAULT NULL,
+  `Cantidad` varchar(45) DEFAULT NULL,
+  `PrecioUnitario` varchar(45) DEFAULT NULL,
+  `PrecioTotal` varchar(45) DEFAULT NULL,
   `id_pago` int DEFAULT NULL,
   `id_envio` int DEFAULT NULL,
   PRIMARY KEY (`id_factura`),
+  KEY `id_usuario` (`id_usuario`),
   KEY `id_productos` (`id_productos`),
+  KEY `id_pago` (`id_pago`,`id_envio`),
   KEY `id_envio` (`id_envio`),
-  KEY `id_pago` (`id_pago`),
-  KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id_productos`),
+  CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_envio`) REFERENCES `envio` (`id_envio`),
   CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`id_pago`) REFERENCES `metododepago` (`id_pago`),
-  CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`)
+  CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id_productos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -181,6 +98,33 @@ CREATE TABLE `factura` (
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ingresosproveedores`
+--
+
+DROP TABLE IF EXISTS `ingresosproveedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ingresosproveedores` (
+  `id_ingresos` int NOT NULL AUTO_INCREMENT,
+  `id_productos` int DEFAULT NULL,
+  `Cantidad` varchar(45) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  PRIMARY KEY (`id_ingresos`),
+  KEY `id_productos` (`id_productos`),
+  CONSTRAINT `ingresosproveedores_ibfk_1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id_productos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ingresosproveedores`
+--
+
+LOCK TABLES `ingresosproveedores` WRITE;
+/*!40000 ALTER TABLE `ingresosproveedores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ingresosproveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +164,7 @@ CREATE TABLE `metododepago` (
   `metodo_pago` varchar(45) DEFAULT NULL,
   `condicion_pago` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_pago`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +192,7 @@ CREATE TABLE `productos` (
   `id_categorias` int DEFAULT NULL,
   PRIMARY KEY (`id_productos`),
   KEY `id_categorias` (`id_categorias`),
-  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id_categorias`)
+  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id_Categorias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -270,7 +214,7 @@ DROP TABLE IF EXISTS `proveedores`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proveedores` (
   `id_proveedores` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
+  `nombre_proveesor` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `telefono` int DEFAULT NULL,
   `id_productos` int DEFAULT NULL,
@@ -298,12 +242,10 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id_admin` int NOT NULL,
-  `id_cliente` int DEFAULT NULL,
-  KEY `id_cliente` (`id_cliente`),
-  KEY `roles_ibfk_2` (`id_admin`),
-  CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  CONSTRAINT `roles_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`)
+  `id_rol` int NOT NULL AUTO_INCREMENT,
+  `nombre_rol` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_rol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -315,6 +257,38 @@ LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `tipodedocumento` varchar(45) DEFAULT NULL,
+  `num_documento` varchar(45) DEFAULT NULL,
+  `nombres` varchar(45) DEFAULT NULL,
+  `apellidos` varchar(45) DEFAULT NULL,
+  `Direccion` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `contraseña` varchar(45) DEFAULT NULL,
+  `id_roles` int NOT NULL,
+  PRIMARY KEY (`id_usuario`,`id_roles`),
+  KEY `id_roles` (`id_roles`),
+  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_roles`) REFERENCES `roles` (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -325,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-31 11:29:33
+-- Dump completed on 2023-09-06 13:35:42
