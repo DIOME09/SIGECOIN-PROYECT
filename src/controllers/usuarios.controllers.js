@@ -11,7 +11,7 @@ export const getUsuarios = async (req,res) => {
 export const getUsuario = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM usuario WHERE id_usuario = ?', [
-            req.params.id
+            req.params.id_usuario
         ]);
 
         if(rows.length <= 0)

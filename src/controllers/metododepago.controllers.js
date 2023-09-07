@@ -11,7 +11,7 @@ export const getmetododepagos = async (req,res) => {
 export const getmetododepago = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM metododepago WHERE id_pago = ?', [
-            req.params.id
+            req.params.id_pago
         ]);
 
         if(rows.length <= 0)

@@ -57,7 +57,7 @@ export const updateIngreso = async (req,res) => {
         const {id_ingresos} = req.params
         const {id_productos, cantidad, fecha_ingreso} = req.body
 
-        const [result] = await pool.query(
+        const [rows] = await pool.query(
           'UPDATE ingresosproveedores SET id_productos = IFNULL(?, id_productos), cantidad = IFNULL(?, cantidad), fecha_ingreso = IFNULL(?, fecha_ingreso) WHERE id_ingresos = ?',
           [id_productos, cantidad, fecha_ingreso, id_ingresos]
           

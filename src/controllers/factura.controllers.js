@@ -63,7 +63,7 @@ export const updateFactura = async (req,res) => {
 
         const [result] = await pool.query(
           'UPDATE facturas SET id_usuario = IFNULL(?, id_usuario), id_productos = IFNULL(?, id_productos), cantidad = IFNULL(?, cantidad), precioUnitario = IFNULL(?, precioUnitario), precioTotal = IFNULL(?, precioTotal), id_pago = IFNULL(?, id_pago), id_envio = IFNULL(?, id_envio) WHERE id_facturas = ?',
-          [id_usuario, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio]
+          [id_usuario, id_productos, cantidad, precioUnitario, precioTotal, id_pago, id_envio, id_facturas]
         );
         
         if (rows.affectedRows === 0) {
@@ -81,7 +81,8 @@ export const updateFactura = async (req,res) => {
             precioUnitario, 
             precioTotal, 
             id_pago, 
-            id_envio
+            id_envio,
+            id_facturas
         });
     } catch (error) {
         console.error('Error al actualizar una factura:', error);

@@ -59,7 +59,7 @@ export const updateProveedor = async (req,res) => {
         const {id_proveedores} = req.params
         const {nombre_proveesor, email, telefono, id_productos, direccion} = req.body
 
-        const [result] = await pool.query(
+        const [rows] = await pool.query(
           'UPDATE proveedores SET nombre_proveesor = IFNULL(?, nombre_proveesor), email = IFNULL(?, email), telefono = IFNULL(?, telefono), id_productos = IFNULL(?, id_productos), direccion = IFNULL(?, direccion) WHERE id_proveedores = ?',
           [nombre_proveesor, email, telefono, id_productos, direccion, id_proveedores]
         );

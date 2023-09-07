@@ -31,7 +31,7 @@ export const createproductos = async (req,res) => {
     try {
         const {nombre, descripcion, precio, cant_disponible, id_categorias } = req.body
         const [rows] = await pool.query(
-          'INSERT INTO productos (nombre, descripcion, precio, cant_disponible, id_categorias) VALUES(?, ?)', 
+          'INSERT INTO productos (nombre, descripcion, precio, cant_disponible, id_categorias) VALUES(?, ?)', //falta ?????
           [nombre, descripcion, precio, cant_disponible, id_categorias]
         );
         res.send({
@@ -59,7 +59,7 @@ export const updateproducto = async (req,res) => {
 
         const [rows] = await pool.query(
           'UPDATE productos SET nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion), precio = IFNULL(?, precio), cant_disponible = IFNULL (?,cant_disponible), id_categorias = IFNULL (?, id_categorias) WHERE id_productos = ?',
-          [nombre, descripcion, precio, cant_disponible, id_categorias ]
+          [nombre, descripcion, precio, cant_disponible, id_categorias, id_productos ]
         );
         
         if (rows.affectedRows === 0) {

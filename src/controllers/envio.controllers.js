@@ -18,7 +18,7 @@ export const getenvios = async (req,res) => {
 export const getenvio = async (req,res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
-            req.params.id
+            req.params.id_envio
         ]);
 
         if(rows.length <= 0)
@@ -62,27 +62,28 @@ export const updateenvio = async (req,res) => {
         const {id_envio} = req.params
         const {empresa} = req.body
 
-        const [result] = await pool.query(
-          'UPDATE envio SET id_envio = IFNULL(?, id_envio), empresa = IFNULL(?,empresa) WHERE id_envio = ?',
-          [id_envio, empresa]
+        const [rows] = await pool.query(
+          'UPDATE envio SET empresa = IFNULL(?,empresa) WHERE id_envio = ?',
+          [empresa, id_envio]
         );
         
-        if(result.affectedRows === 0) 
-          return res.status(404).json({
-            message: 'Envio no encontrada'
-        });
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Proveedor no encontrado'
+            });
+        }
 
-        const [rows] = await pool.query('SELECT * FROM envio WHERE id_envio = ?', [
-            id_envio,
-        ]);
-        res.json(rows[0])
-      } catch(error) {
-        return res.status(500).json({
-            message: 'Algo va mal'
+        res.json({
+            message: 'Proveedor actualizad exitosamente',
+            envio_id: id_envio,
+            empresa
         });
- 
+    } catch (error) {
+        console.error('Error al actualizar un proveedor:', error);
+        return res.status(500).json({
+            message: 'Algo va mal',
+        });
     }
-    
 }
 
 
