@@ -16,7 +16,7 @@ export const getUsuario = async (req,res) => {
 
         if(rows.length <= 0)
          return res.status(404).json({
-            message: 'Usuarios no encontrada',
+            message: 'Usuarios no encontrados',
           });
         res.json(rows[0]);
       } catch(error) {
