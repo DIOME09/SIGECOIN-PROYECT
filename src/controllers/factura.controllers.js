@@ -41,8 +41,8 @@ export const createFacturas = async (req,res) => {
             id_usuario,
             id_productos,
             cantidad,  
-            precioUnitario, 
-            precioTotal, 
+            preciounitario, 
+            preciototal, 
             id_pago, 
             id_envio,
         });
