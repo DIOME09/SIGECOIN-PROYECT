@@ -29,3 +29,7 @@ INSERT INTO usuarios (tipodedocumento, num_documento, nombres, apellidos, direcc
 ("cedula", 1077876676, "Oscar", "Parra", "Calle 13# 12-30 Neiva", "oscar.pa@gmail.com", 12347,),
 ("cedula", 1077876675, "Viviana", "Peres", "Calle 14# 13-50 Bogota", "vivi.pe@example.com", 12348,);
     
+    /* datos roles*/
+
+INSERT INTO roles (nombre_rol, descripcion) VALUES("Programador", "Ama su trabajo"), ("Diseñadora", "Los mejores diseños");
+
