@@ -1,6 +1,6 @@
 import express from 'express'
 import categoriasRoutes from './routes/categorias.routes.js'
-import entradasRoutes from './routes/entradas.routes.js'
+import ingresosRoutes from './routes/ingresos.routes.js'
 import indexRoutes from './routes/index.routes.js'
 import proveedoresRoutes from './routes/proveedores.routes.js'
 import facturasRoutes from './routes/factura.routes.js'
@@ -22,7 +22,7 @@ app.use(express.json())
 
 app.use(indexRoutes)
 app.use('/api',categoriasRoutes)
-app.use('/api',entradasRoutes)
+app.use('/api',ingresosRoutes)
 app.use('/api',proveedoresRoutes)
 app.use('/api',usuariosRoutes)
 app.use('/api',rolesRoutes)

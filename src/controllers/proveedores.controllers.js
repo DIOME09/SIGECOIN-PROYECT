@@ -31,14 +31,14 @@ export const getProveedor = async (req,res) => {
 
 export const createProveedores = async (req,res) => {
     try {
-        const {nombre, email, telefono, id_productos, direccion} = req.body
+        const {nombre_proveesor, email, telefono, id_productos, direccion} = req.body
         const [rows] = await pool.query(
-          'INSERT INTO proveedores (nombre, email, telefono, id_productos, direccion) VALUES(?, ?, ?, ?, ?)', 
-          [nombre, email, telefono, id_productos, direccion]
+          'INSERT INTO proveedores (nombre_proveesor, email, telefono, id_productos, direccion) VALUES(?, ?, ?, ?, ?)', 
+          [nombre_proveesor, email, telefono, id_productos, direccion]
         );
         res.send({
             id_proveedores: rows.insertId,
-            nombre, 
+            nombre_proveesor, 
             email,
             telefono,
             id_productos,
@@ -57,11 +57,11 @@ export const createProveedores = async (req,res) => {
 export const updateProveedor = async (req,res) => {
     try {
         const {id_proveedores} = req.params
-        const {nombre, email, telefono, id_productos, direccion} = req.body
+        const {nombre_proveesor, email, telefono, id_productos, direccion} = req.body
 
         const [result] = await pool.query(
-          'UPDATE proveedores SET nombre = IFNULL(?, nombre), email = IFNULL(?, email), telefono = IFNULL(?, telefono), id_productos = IFNULL(?, id_productos), direccion = IFNULL(?, direccion) WHERE id_proveedores = ?',
-          [nombre, email, telefono, id_productos, direccion, id_proveedores]
+          'UPDATE proveedores SET nombre_proveesor = IFNULL(?, nombre_proveesor), email = IFNULL(?, email), telefono = IFNULL(?, telefono), id_productos = IFNULL(?, id_productos), direccion = IFNULL(?, direccion) WHERE id_proveedores = ?',
+          [nombre_proveesor, email, telefono, id_productos, direccion, id_proveedores]
         );
         
         if (rows.affectedRows === 0) {
@@ -73,7 +73,7 @@ export const updateProveedor = async (req,res) => {
         res.json({
             message: 'Proveedor actualizad exitosamente',
             proveedores_id: id_proveedores,
-            nombre, 
+            nombre_proveesor, 
             email, 
             telefono, 
             id_productos, 
