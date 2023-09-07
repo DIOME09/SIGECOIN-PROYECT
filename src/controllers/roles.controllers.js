@@ -17,8 +17,8 @@ export const getRoles = async (req,res) => {
 
 export const getRole = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM roles WHERE id_rol = ?', [
-            req.params.id
+        const [rows] = await pool.query('SELECT * FROM roles WHERE id_roles = ?', [
+            req.params.id_roles
         ]);
 
         if(rows.length <= 0)

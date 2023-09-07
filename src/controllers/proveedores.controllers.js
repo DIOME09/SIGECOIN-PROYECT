@@ -1,7 +1,7 @@
 import { pool } from '../db.js'
 
 export const getProveedores = async( req, res) =>{
-    const [rows] = await pool.query('SELECT * FROM proveedores')
+    const [rows] = await pool.query('SELECT * FROM ingresosproveedores')
     res.json(rows)
 }
 
@@ -10,7 +10,7 @@ export const getProveedores = async( req, res) =>{
 
 export const getProveedor = async (req,res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM proveedores WHERE id_proveedores = ?', [
+        const [rows] = await pool.query('SELECT * FROM ingresosproveedores WHERE id_proveedores = ?', [
             req.params.id_proveedores
         ]);
 
