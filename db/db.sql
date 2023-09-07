@@ -1,8 +1,8 @@
 /*datos tabla envio*/
 
- INSERT INTO envio ( empresa ) VALUES ("zapatex"),
-    -> ("bodegon"),("calzadiana"),("zaptejil"),("adidastex"),("laquinta"),
-    ("expotex"),("juansport"),("danilotex"),("rematessport");
+ INSERT INTO envio ( empresa ) VALUES ("interrapidizimo"),
+    ("servientrega"),("markepley"),("envia"),("correos"),("tcc"),
+    ("coordinadora"),("avianca"),("deprix"),("mercadoenvio");
 
 /*datos metododepago*/
 
