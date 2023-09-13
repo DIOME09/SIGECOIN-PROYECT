@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `factura`;
 CREATE TABLE `factura` (
   `id_factura` int NOT NULL AUTO_INCREMENT,
   `id_usuario` int DEFAULT NULL,
-  `fechaEmision` date DEFAULT NULL,
+  `fechaEmision` timestamp(6) NULL DEFAULT NULL,
   `id_productos` int DEFAULT NULL,
   `cantidad` varchar(45) DEFAULT NULL,
   `preciounitario` varchar(45) DEFAULT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `ingresosproveedores` (
   `id_ingresos` int NOT NULL AUTO_INCREMENT,
   `id_productos` int DEFAULT NULL,
   `cantidad` varchar(45) DEFAULT NULL,
-  `fecha_ingreso` date DEFAULT NULL,
+ `fecha_ingreso` timestamp(6) NULL DEFAULT NULL,
   PRIMARY KEY (`id_ingresos`),
   KEY `id_productos` (`id_productos`),
   CONSTRAINT `ingresosproveedores_ibfk_1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id_productos`)
@@ -220,7 +220,7 @@ DROP TABLE IF EXISTS `proveedores`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proveedores` (
   `id_proveedores` int NOT NULL AUTO_INCREMENT,
-  `nombre_proveesor` varchar(45) DEFAULT NULL,
+  `nombre_proveedor` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `telefono` bigint DEFAULT NULL,
   `id_productos` bigint DEFAULT NULL,
